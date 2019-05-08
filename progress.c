@@ -1,57 +1,43 @@
-#pragma config(Sensor, dgtl1,  wireLever,    sensorTouch);
-#pragma config(Sensor, dgtl2,  resetButton,  sensorTouch);
-#pragma config(Sensor, dgtl3,  killSwitch,   sensorTouch);
+#pragma config(Sensor, dgtl1,  turnLever,    sensorTouch);
+#pragma config(Sensor, dgtl2,  backLever,    sensorTouch);
+#pragma config(Sensor, dgtl3,  resetButton,  sensorTouch);
+#pragma config(Sensor, dgtl4,  killSwitch,   sensorTouch);
 #pragma config(Motor,  port1,  spoolMotor,   tmotorVex269_MC29, openLoop);
-#pragma config(Motor,  port2,  displayMotor, tmotorVex269_MC29, openLoop);
 
-const int MotorSpeed = 1;
-
-bool running = true;
 int position = 0;
 
-void turnSpool(int motorSpeed);
-void reset(int motorSpeed);
+bool checkKillSwitch();
+//void reset();
+void turnSpool();
 
 task main() {
+	
+	setMotorTarget(spoolMotor, 0);
 
-	while (running) {
+	while (true) {
+	
+		if (checkKillSwitch()) break;
 		
-		if (SensorValue(killSwitch)) {
-			
-			running = false;
-			
-			break;
-		
-		}
-		
-		turnSpool(MotorSpeed);
+		turnSpool();
 	
 	}
 
 }
 
-void turnSpool(int motorSpeed) {
+bool checkKillSwitch() {
+
+	if (SensorValue(killSwitch)) return true;
 	
-	if (SensorValue(killSwitch)) {
-		
-		running = false;
-		
-		return;
-	
-	}
-	
-	if (SensorValue(wireLever)) {
-		
-		position += motorSpeed;
-		
-		setMotorTarget(spoolMotor, position);
-	
-	}
+	return false;
 
 }
 
-void reset(int motorSpeed) {
+void turnSpool() {
+
+	if (checkKillSwitch()) return;
 	
-	return;
+	setMotorTarget(spoolMotor, position);
+	
+	position++;
 
 }
