@@ -5,22 +5,21 @@
 #pragma config(Motor,  port1,  spoolMotor,   tmotorVex269_MC29, openLoop);
 
 int position = 0;
+int spoolSpeed = 13;
 
 bool checkKillSwitch();
 //void reset();
 void turnSpool();
 
 task main() {
-	
-	setMotorTarget(spoolMotor, 0);
 
-	while (true) {
-	
-		if (checkKillSwitch()) break;
+	while (!checkKillSwitch()) {
 		
 		turnSpool();
 	
 	}
+	
+	untilBump(resetButton);
 
 }
 
@@ -34,10 +33,22 @@ bool checkKillSwitch() {
 
 void turnSpool() {
 
-	if (checkKillSwitch()) return;
+	if (checkKillSwitch() || (SensorValue(turnLever) && SensorValue(backLever))) return;
 	
-	setMotorTarget(spoolMotor, position);
+	if (SensorValue(turnLever)) {
 	
-	position++;
+		position++;
+		
+		setMotorTarget(spoolMotor, position, spoolSpeed);
+	
+	}
+	
+	if (SensorValue(backLever)) {
+	
+		position--;
+		
+		setMotorTarget(spoolMotor, (position * -1), (spoolSpeed) * -1);
+	
+	}
 
 }
