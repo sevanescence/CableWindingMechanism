@@ -71,7 +71,7 @@ void turnSpool() {
 	
 		position--;
 		
-		setMotorTarget(spoolMotor, (position * -1), (spoolSpeed) * -1);
+		setMotorTarget(spoolMotor, position, (spoolSpeed) * -1);
 	
 	} // the spool will never reach below 0.
 
