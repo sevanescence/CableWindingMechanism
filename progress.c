@@ -83,7 +83,7 @@ void reset() {
 	
 	while (SensorValue(spoolMotor) > position) {
 		
-		if (SensorValue(resetButton)) break;
+		if (SensorValue(killSwitch)) break;
 		
 		setMotorTarget(spoolMotor, SensorValue(spoolMotor) - 1, spoolSpeed);
 		
