@@ -7,6 +7,7 @@
 int position = 0; // current documented position of the motor
 int maxPos = 500; // the maximum distance the spool can unravel
 int spoolSpeed = 13; // the speed at which the spool unravels
+bool stopped = false; // kill switch boolean
 
 bool checkKillSwitch();
 void reset();
@@ -14,9 +15,11 @@ void turnSpool();
 
 task main() {
 	
+	stopped = false;
+	
 	reset(); // ensures that the spool position is reset before startup.
 
-	while (!checkKillSwitch()) { // this will loop as long as the kill switch is not pressed.
+	while (!stopped) { // this will loop as long as the kill switch is not pressed or hasnt been pressed.
 		
 		turnSpool(); // refer to turnSpool() method
 	
@@ -30,7 +33,13 @@ task main() {
 
 bool checkKillSwitch() {
 
-	if (SensorValue(killSwitch)) return true;
+	if (SensorValue(killSwitch)) {
+		
+		stopped = true;
+		
+		return true;
+		
+	}
 	
 	return false;
 
