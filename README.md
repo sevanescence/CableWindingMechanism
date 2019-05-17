@@ -23,4 +23,5 @@ The device must also have an emergency kill device.
 
 #### To-Do List
 - [x] Fix bug where motorEncoder surpasses 0 after reset() call
-- [ ] Fix bug where retLever continues to function when the (motorEncoder >= 0)
+- [x] Fix bug where retLever continues to function when the (motorEncoder >= 0)
+- [x] Apply reset() method bug fix to retLever in main task
