@@ -1,6 +1,6 @@
 # CableWindingMechanism
 
-##### Objective
+#### Objective
 A telecommunications contractor needs your team to design a device that can
 accurately extend and retract a length of cable.
 
