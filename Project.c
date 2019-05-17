@@ -42,7 +42,11 @@ void reset() {
 
 	while (SensorValue(motorEncoder) < 0) {
 		if (SensorValue(killSwitch)) return;
-		startMotor(spoolMotor, 40);
+		if (SensorValue(motorEncoder) < -100) {
+			startMotor(spoolMotor, 40);
+		} else {
+			startMotor(spoolMotor, 24);
+		}
 	}
 
 	stopMotor(spoolMotor);
