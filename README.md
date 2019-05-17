@@ -12,3 +12,13 @@ The operator should be able to have some way to see how much cable has been
 dispensed.
 
 The device must also have an emergency kill device.
+
+#### Features
+- outLever : releases wire from the spool
+- retLever : rewinds spool
+
+
+#### To-Do List
+- [x] Upload base program
+- [ ] Fix bug where motorEncoder surpasses 0 after reset() call
+- [ ] Fix bug where retLever continues to function when the encoder > 0
