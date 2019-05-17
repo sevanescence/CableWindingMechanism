@@ -16,9 +16,10 @@ The device must also have an emergency kill device.
 #### Features
 - outLever : releases wire from the spool
 - retLever : rewinds spool
-
+- resetButton : complete retracts spool
+- killSwitch : stops all processes and breaks main task loop, allows for reset
 
 #### To-Do List
-- [x] Upload base program
+- [x] Write base program
 - [ ] Fix bug where motorEncoder surpasses 0 after reset() call
-- [ ] Fix bug where retLever continues to function when the encoder > 0
+- [ ] Fix bug where retLever continues to function when the (motorEncoder >= 0)
