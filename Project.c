@@ -1,5 +1,5 @@
-#pragma config(Sensor, dgtl1,  backLever,    sensorTouch);
-#pragma config(Sensor, dgtl2,  turnLever,    sensorTouch);
+#pragma config(Sensor, dgtl1,  retLever,    sensorTouch);
+#pragma config(Sensor, dgtl2,  outLever,    sensorTouch);
 #pragma config(Sensor, dgtl3,  resetButton,  sensorTouch);
 #pragma config(Sensor, dgtl4,  killSwitch,   sensorTouch);
 #pragma config(Sensor, dgtl11, motorEncoder, sensorQuadEncoder)
@@ -18,12 +18,12 @@ task main() {
 			return;
 		}
 
-		while (SensorValue(backLever)) {
+		while (SensorValue(retLever)) {
 			if (SensorValue(killSwitch)) break;
 			startMotor(spoolMotor, 40);
 		}
 
-		while (SensorValue(turnLever)) {
+		while (SensorValue(outLever)) {
 			if (SensorValue(killSwitch)) break;
 			startMotor(spoolMotor, -40);
 		}
