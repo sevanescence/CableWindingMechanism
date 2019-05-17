@@ -6,6 +6,8 @@
 #pragma config(Motor,  port1,  spoolMotor,   tmotorVex269_MC29, openLoop);
 
 int position = 0;
+string status = "uncontrolled";
+bool resetting = false;
 
 void reset(); // method used to retract the motor to zero
 void update(); // method used to update the position display
@@ -25,18 +27,22 @@ task main() {
 
 		while (SensorValue(retLever) && SensorValue(motorEncoder) < 0) {
 			if (SensorValue(killSwitch)) break; // checks if the kill switch is pressed
+			status = "retracting...";
 			if (SensorValue(motorEncoder) > -50) {
 				startMotor(spoolMotor, 24); // the motor will slow down if the encoder approaches zero, to avoid bugs
 			} else {
 				startMotor(spoolMotor, 40);
 			}
 			update();
+			status = "uncontrolled";
 		}
 
 		while (SensorValue(outLever)) {
 			if (SensorValue(killSwitch)) break; // checks if the kill switch is pressed
+			status = "releasing...";
 			startMotor(spoolMotor, -40);
 			update();
+			status = "uncontrolled";
 		}
 
 	} stopMotor(spoolMotor); // stops the motor at the end of the loop to avoid bugs in case the kill switch is pressed
@@ -54,6 +60,8 @@ task main() {
 
 void reset() {
 
+	resetting = true;
+
 	while (SensorValue(motorEncoder) < 0) { // reset operation will run until the spool has completely retracted
 		if (SensorValue(killSwitch)) return; // will instantly stop the operation if the kill switch is pressed
 		if (SensorValue(motorEncoder) < -100) {
@@ -65,6 +73,8 @@ void reset() {
 	}
 
 	stopMotor(spoolMotor);
+
+	resetting = false;
 
 }
 
