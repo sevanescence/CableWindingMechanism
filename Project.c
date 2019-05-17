@@ -18,9 +18,13 @@ task main() {
 			return;
 		}
 
-		while (SensorValue(retLever)) {
+		while (SensorValue(retLever) && SensorValue(motorEncoder) < 0) {
 			if (SensorValue(killSwitch)) break;
-			startMotor(spoolMotor, 40);
+			if (SensorValue(motorEncoder) > -50) {
+				startMotor(spoolMotor, 24);
+			} else {
+				startMotor(spoolMotor, 40);
+			}
 		}
 
 		while (SensorValue(outLever)) {
