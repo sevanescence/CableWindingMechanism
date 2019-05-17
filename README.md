@@ -20,6 +20,5 @@ The device must also have an emergency kill device.
 - killSwitch : stops all processes and breaks main task loop, allows for reset
 
 #### To-Do List
-- [x] Write base program
 - [ ] Fix bug where motorEncoder surpasses 0 after reset() call
 - [ ] Fix bug where retLever continues to function when the (motorEncoder >= 0)
