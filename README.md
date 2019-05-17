@@ -13,11 +13,13 @@ dispensed.
 
 The device must also have an emergency kill device.
 
-#### Features
+#### Hardware Components
 - outLever : releases wire from the spool
 - retLever : rewinds spool
 - resetButton : complete retracts spool
 - killSwitch : stops all processes and breaks main task loop, allows for reset
+- spoolMotor : open-loop motor controlled by every sensory component
+- motorEncoder : encoder connected to the motor shaft in order to record the positon of the spoolMotor
 
 #### To-Do List
 - [x] Fix bug where motorEncoder surpasses 0 after reset() call
