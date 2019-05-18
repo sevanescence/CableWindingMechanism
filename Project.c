@@ -18,7 +18,10 @@ task main() {
 
 	while (!SensorValue(killSwitch)) { // will run cable winding program until the kill switch is pressed
 
-		stopMotor(spoolMotor); // stops the motor at the beginning of the while loop to avoid machine lag
+		stopMotor(spoolMotor); // stops the motor at the beginning of the while loop to avoid bug where
+		                       // the motor will continue to run until the program is terminated.
+		                       // if this was placed at the end of the loop, any block that breaks
+		                       // the loop would not allow the motor to stop.
 
 		if (SensorValue(resetButton)) { // checks if the reset button is pressed before lever operations
 			reset();
