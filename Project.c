@@ -34,8 +34,8 @@ task main() {
 		// unravel and retration levers are written in loops rather than loop statements in order to avoid
 		// further machine lag
 
-		while (SensorValue(retLever) && SensorValue(motorEncoder) < 0) { // retraction lever will only work if the spool is out
-			if (SensorValue(killSwitch)) break; // checks if the kill switch is pressed
+		while (SensorValue(retLever) && SensorValue(motorEncoder) < 0 && !SensorValue(killSwitch)) { 
+			// retraction lever will only work if the spool is out and the kill switch is not being pressed
 			status = "retracting...";
 			if (SensorValue(motorEncoder) > -50) {
 				startMotor(spoolMotor, 24); // the motor will slow down if the encoder approaches zero, to avoid bugs
@@ -48,8 +48,8 @@ task main() {
 			update();
 		}
 
-		while (SensorValue(outLever)) {
-			if (SensorValue(killSwitch)) break; // checks if the kill switch is pressed
+		while (SensorValue(outLever) && !SensorValue(killSwitch)) {
+			// will only run if the kill switch is not being pressed
 			status = "releasing...";
 			startMotor(spoolMotor, -40);
 			update();
@@ -95,9 +95,9 @@ void reset() {
 
 void update() {
 
-	position = (SensorValue(motorEncoder) / 10) * -1; // encoder to measurement formula
-							  // would realistically be more sophisticated and
-							  // involve variables like gear ratio and imperial
-							  // measurement conversions
+	position = (SensorValue(motorEncoder) / -10); // encoder to measurement formula
+						      // would realistically be more sophisticated and
+						      // involve variables like gear ratio and imperial
+						      // measurement conversions
 
 }
