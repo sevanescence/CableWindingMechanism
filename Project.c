@@ -31,8 +31,8 @@ task main() {
 		} // the reset block above allows the reset button and kill switch to be mashed as many times as
 		  // the user desires without breaking the program
 		
-		// unravel and retration levers are written in loops rather than loop statements in order to avoid
-		// further machine lag
+		// unravel and retration levers are written in loops rather than if statements in order to avoid
+		// machine lag
 
 		while (SensorValue(retLever) && SensorValue(motorEncoder) < 0 && !SensorValue(killSwitch)) { 
 			// retraction lever will only work if the spool is out and the kill switch is not being pressed
