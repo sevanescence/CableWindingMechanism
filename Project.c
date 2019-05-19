@@ -74,7 +74,8 @@ void reset() {
 
 	resetting = true;
 
-	while (SensorValue(motorEncoder) < 0 && !SensorValue(killSwitch)) { // reset operation will run until the spool has completely retracted
+	while (SensorValue(motorEncoder) < 0 && !SensorValue(killSwitch)) { 
+		// reset operation will run until the spool has completely retracted
 		if (SensorValue(motorEncoder) > -100) { // as seen in the retLever loop, this slowing down of the motor
 			startMotor(spoolMotor, 24);     // is to avoid inaccurate record bugs
 		} else {
