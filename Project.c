@@ -58,7 +58,6 @@ task main() {
 		status = "uncontrolled";
 
 	} stopMotor(spoolMotor); // stops the motor at the end of the loop to avoid bugs in case the kill switch is pressed
-		// if this function were written at the end of the loop block, the motor would lag
 
 	untilBump(resetButton); // waits for the reset button to be pressed after the kill switch has been pressed
 
