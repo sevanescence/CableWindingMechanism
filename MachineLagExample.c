@@ -7,7 +7,7 @@
 
 task main() {
 
-  while (!SensorValue(motorEncoder)) {
+  while (!SensorValue(killSwitch) {
   
     if (SensorValue(retLever)) {
     
